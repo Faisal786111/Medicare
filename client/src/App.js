@@ -1,6 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
+import CommonPage from "./pages/CommonPage";
+import AdminHome from "./pages/admin/AdminHome";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ChatLogin from "./pages/ChatApp/pages/Login";
@@ -9,6 +11,7 @@ import SetAvatar from "./components/SetAvatar";
 import Chat from "./pages/ChatApp/pages/Chat";
 import Chatbot from "./pages/Chatbot";
 import Medical from './pages/Medical';
+import DoctorHome from "./pages/doctor/DoctorHome";
 import { useSelector } from "react-redux";
 import Spinner from "./components/Spinner";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -161,10 +164,34 @@ function App() {
               }
             />
             <Route
+              path="/doctorhome"
+              element={
+                <ProtectedRoute>
+                  <DoctorHome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/"
               element={
                 <ProtectedRoute>
+                  <CommonPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/UserHome"
+              element={
+                <ProtectedRoute>
                   <HomePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/AdminMenu"
+              element={
+                <ProtectedRoute>
+                  <AdminHome />
                 </ProtectedRoute>
               }
             />
