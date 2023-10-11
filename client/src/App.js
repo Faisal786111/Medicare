@@ -188,7 +188,7 @@ function App() {
               }
             />
             <Route
-              path="/AdminMenu"
+              path="/AdminHome"
               element={
                 <ProtectedRoute>
                   <AdminHome />
