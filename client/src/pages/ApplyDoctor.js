@@ -12,6 +12,7 @@ const ApplyDoctor = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   //handle form
   const handleFinish = async (values) => {
     try {

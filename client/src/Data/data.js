@@ -30,7 +30,7 @@ export const userMenu = [
 export const adminMenu = [
   {
     name: "Home",
-    path: "/AdminMenu",
+    path: "/AdminHome",
     icon: "fa-solid fa-house",
   },
 

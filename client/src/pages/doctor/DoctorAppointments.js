@@ -96,7 +96,7 @@ const DoctorAppointments = () => {
   return (
     <Layout >
       <div className="backimg_1" style={{ minHeight: '100%' }}>
-        <h1>Appoinmtnets Lists</h1>
+        <h1 className="text-center">{'<<<'}Appoinmtnets List{'>>>'}</h1>
         <Table columns={columns} dataSource={appointments} bordered style={{ border: '1px solid black', margin: '5px 10px', backgroundColor: 'lightgray' }} />
       </div>
     </Layout>
