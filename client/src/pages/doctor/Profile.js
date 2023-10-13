@@ -79,10 +79,10 @@ const Profile = () => {
         <div className="backimg_1" style={{ justifyContent: 'center', alignItems: "center", display: 'flex', minHeight: '100%' }}>
           <Form onFinish={handleFinish} className="register-form2" initialValues={{
             ...doctor,
-            timings: [
-              moment(doctor.timings[0], "HH:mm"),
-              moment(doctor.timings[1], "HH:mm"),
-            ],
+            // timings: [
+            //   moment(doctor.timings[0], "HH:mm"),
+            //   moment(doctor.timings[1], "HH:mm"),
+            // ],
           }}
           >
             <h3 className="text-center">Update Doctor Profile</h3>
