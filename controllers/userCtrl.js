@@ -182,8 +182,8 @@ const getAllDocotrsController = async (req, res) => {
 //BOOK APPOINTMENT
 const bookeAppointmnetController = async (req, res) => {
   try {
-    req.body.date = moment(req.body.date, "DD-MM-YYYY").toISOString();
-    req.body.time = moment(req.body.time, "HH:mm").toISOString();
+    // req.body.date = moment(req.body.date, "DD-MM-YYYY").toISOString();
+    // req.body.time = moment(req.body.time, "HH:mm").toISOString();
     req.body.status = "pending";
     const newAppointment = new appointmentModel(req.body);
     await newAppointment.save();
@@ -211,24 +211,21 @@ const bookeAppointmnetController = async (req, res) => {
 // booking bookingAvailabilityController
 const bookingAvailabilityController = async (req, res) => {
   try {
-    const date = moment(req.body.date, "DD-MM-YY").toISOString();
-    const fromTime = moment(req.body.time, "HH:mm")
-      .subtract(1, "hours")
-      .toISOString();
-    const toTime = moment(req.body.time, "HH:mm").add(1, "hours").toISOString();
+    const date = req.body.date;
+    const time = req.body.time;
+      
     const doctorId = req.body.doctorId;
+    
     const appointments = await appointmentModel.find({
       doctorId,
       date,
-      time: {
-        $gte: fromTime,
-        $lte: toTime,
-      },
+      time,
     });
+    
     if (appointments.length > 0) {
       return res.status(200).send({
         message: "Appointments not Availibale at this time",
-        success: true,
+        success: false,
       });
     } else {
       return res.status(200).send({

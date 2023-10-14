@@ -50,8 +50,8 @@ const Appointments = () => {
       dataIndex: "date",
       render: (text, record) => (
         <span>
-          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
-          {moment(record.time).format("HH:mm")}
+          {record.date}
+          {record.time}
         </span>
       ),
     },
@@ -64,7 +64,7 @@ const Appointments = () => {
   return (
     <Layout>
       <div className="backimg_1" style={{ minHeight: '100%' }}>
-        <h1 className="text-center">{'<<<'}Appoinmtnets List{'>>>'}</h1>
+        <h1 className="text-center">{'<<<'}Appointments List{'>>>'}</h1>
         <Table columns={columns} dataSource={appointments} bordered style={{ border: '1px solid black', margin: '5px 10px', backgroundColor: 'lightgray' }} />
       </div>
     </Layout>

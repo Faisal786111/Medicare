@@ -12,7 +12,7 @@ const BookingPage = () => {
   const params = useParams();
   const [doctors, setDoctors] = useState([]);
   const [date, setDate] = useState("");
-  const [time, setTime] = useState();
+  const [time, setTime] = useState("07:20");
   const [isAvailable, setIsAvailable] = useState(false);
   const dispatch = useDispatch();
   // login user data
@@ -36,8 +36,11 @@ const BookingPage = () => {
   };
   // ============ handle availiblity
   const handleAvailability = async () => {
+    if (!date && !time) {
+      return alert("Date & Time Required");
+    }
     try {
-      dispatch(showLoading());
+      // dispatch(showLoading());
       const res = await axios.post(
         "/api/v1/user/booking-availbility",
         { doctorId: params.doctorId, date, time },
@@ -68,7 +71,7 @@ const BookingPage = () => {
       if (!date && !time) {
         return alert("Date & Time Required");
       }
-      dispatch(showLoading());
+      // dispatch(showLoading());
       const res = await axios.post(
         "/api/v1/user/book-appointment",
         {
@@ -111,17 +114,23 @@ const BookingPage = () => {
                 <h4>Dr.{doctors.firstName} {doctors.lastName}</h4>
                 <h4>Fees : {doctors.feesPerCunsaltation}</h4>
                 <h4>
-                  Timings : {doctors.timings && doctors.timings[0]} -{" "}
-                  {doctors.timings && doctors.timings[1]}{" "}
+                  Timings : {doctors.timings && doctors.timings.startTime} -{" "}
+                  {doctors.timings && doctors.timings.endTime}{" "}
                 </h4>
                 <Divider style={{ borderColor: 'black' }}></Divider>
                 <div className="d-flex flex-column w-75" style={{ marginLeft: 80 }}>
-                  <DatePicker aria-required={"true"} className="m-2" format="DD-MM-YYYY" onChange={(value) => {
-                    setDate(moment(value).format("DD-MM-YYYY"));
-                  }} />
-                  <TimePicker aria-required={"true"} format="HH:mm" className="mt-2" onChange={(value) => {
-                    setTime(moment(value).format("HH:mm"));
-                  }} />
+                  <DatePicker
+                    aria-required="true"
+                    className="m-2"
+                    format="DD-MM-YYYY"
+                    onChange={(value) => setDate(value.format("DD-MM-YYYY"))}
+                  />
+                  <TimePicker
+                    aria-required="true"
+                    format="HH:mm"
+                    className="mt-2"
+                    onChange={(value) => setTime(value.format("HH:mm"))}
+                  />
                   <Button className="btn btn-warning mt-2 mb-3" onClick={handleAvailability} style={{ borderRadius: "10px" }}> Check Availability </Button>
                   <Button className="btn btn-dark mb-5" onClick={handleBooking} style={{ borderRadius: "10px" }}>Book Now</Button>
                 </div>
