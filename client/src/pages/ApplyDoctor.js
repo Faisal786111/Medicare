@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Layout from "./../components/Layout";
 import { Col, Divider, Form, Input, Row, TimePicker, message, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,23 +9,24 @@ import moment from "moment";
 
 const ApplyDoctor = () => {
   const { user } = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //handle form
   const handleFinish = async (values) => {
+    console.log(values.timings)
     try {
       dispatch(showLoading());
+      const formattedTimings = values.timings.map(time => time.format("HH:mm"));
       const res = await axios.post(
         "/api/v1/user/apply-doctor",
         {
           ...values,
           userId: user._id,
-          timings: [
-            moment(values.timings[0]).format("HH:mm"),
-            moment(values.timings[1]).format("HH:mm"),
-          ],
+          timings: {
+            startTime: formattedTimings[0],
+            endTime: formattedTimings[1],
+          },
         },
         {
           headers: {
@@ -49,7 +50,7 @@ const ApplyDoctor = () => {
   return (
     <Layout>
       <div className='backimg_1' style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', minHeight: "100%" }}>
-        <Form onFinish={handleFinish} className="register-form2">
+        <Form onFinish={handleFinish} className="register-form2"  > 
           <h3 className="text-center">{'<<<'}Apply Doctor{'>>>'}</h3>
           <hr />
           <Divider style={{ borderColor: 'black' }}>Personal Details</Divider>
