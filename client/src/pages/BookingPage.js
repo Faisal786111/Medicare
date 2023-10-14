@@ -34,7 +34,8 @@ const BookingPage = () => {
       console.log(error);
     }
   };
-  // ============ handle availiblity
+
+  // ============ handle availiblity==============================
   const handleAvailability = async () => {
     try {
       dispatch(showLoading());
