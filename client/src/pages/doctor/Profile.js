@@ -15,18 +15,29 @@ const Profile = () => {
   const params = useParams();
   // update doc ==========
   //handle form
+
+
   const handleFinish = async (values) => {
     try {
       dispatch(showLoading());
+      // const [startTime, endTime] = values.timings.map(time => time.format("HH:mm"));
+      const formattedTimings = values.timings.map(time => time.format("HH:mm"));
+      const startTime  = formattedTimings[0];
+      const endTime  = formattedTimings[1];
+      
+      console.log(values.timings.startTime)
+      console.log(startTime, "-", endTime)
+      console.log(values.firstName)
+      // Check if both startTime and endTime are valid before sending the request
       const res = await axios.post(
         "/api/v1/doctor/updateProfile",
         {
           ...values,
           userId: user._id,
-          timings: [
-            moment(values.timings[0]).format("HH:mm"),
-            moment(values.timings[1]).format("HH:mm"),
-          ],
+          timings: {
+            startTime,
+            endTime,
+          },
         },
         {
           headers: {
@@ -35,6 +46,7 @@ const Profile = () => {
         }
       );
       dispatch(hideLoading());
+    
       if (res.data.success) {
         message.success(res.data.message);
         navigate("/");
@@ -44,9 +56,11 @@ const Profile = () => {
     } catch (error) {
       dispatch(hideLoading());
       console.log(error);
-      message.error("Somthing Went Wrrong ");
+      message.error("Something Went Wrong");
     }
   };
+
+
   // update doc ==========
 
   //getDOc Details
@@ -62,13 +76,26 @@ const Profile = () => {
         }
       );
       if (res.data.success) {
-        setDoctor(res.data.data);
+        // console.log(res.data.data.timings)
+        // Format the timings for display in the TimePicker
+        const formattedTimings = [ 
+          moment(res.data.data.timings.startTime, "HH:mm"),
+          moment(res.data.data.timings.endTime, "HH:mm"),
+        ];
+
+        setDoctor({
+          ...res.data.data,
+          timings:formattedTimings,
+        });
+         console.log(doctor)
       }
     } catch (error) {
       console.log(error);
     }
   };
-
+  const handleTimeRangeChange = (value, dateString) => {
+    console.log('Selected time range:', dateString);
+  };
   useEffect(() => {
     getDoctorInfo();
     //eslint-disable-next-line
@@ -77,14 +104,7 @@ const Profile = () => {
     <Layout>
       {doctor && (
         <div className="backimg_1" style={{ justifyContent: 'center', alignItems: "center", display: 'flex', minHeight: '100%' }}>
-          <Form onFinish={handleFinish} className="register-form2" initialValues={{
-            ...doctor,
-            // timings: [
-            //   moment(doctor.timings[0], "HH:mm"),
-            //   moment(doctor.timings[1], "HH:mm"),
-            // ],
-          }}
-          >
+          <Form onFinish={handleFinish} className="register-form2" initialValues={doctor}>
             <h3 className="text-center">Update Doctor Profile</h3>
             <hr />
             <Divider style={{ borderColor: 'black' }}>Personal Details</Divider>
@@ -149,6 +169,7 @@ const Profile = () => {
                   <TimePicker.RangePicker format="HH:mm" />
                 </Form.Item>
               </Col>
+              
             </Row>
             <Form.Item style={{ marginLeft: 185 }}>
               <Button type='primary' htmlType='submit' shape='round' size='large' style={{ width: "300px" }}>Update</Button>

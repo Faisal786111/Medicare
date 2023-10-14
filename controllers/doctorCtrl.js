@@ -5,21 +5,40 @@ const userModel = require("../models/userModels");
 //Get Doctor Information............
 const getDoctorInfoController = async (req, res) => {
   try {
-    const doctor = await doctorModel.findOne({ userId: req.body.userId });
+    const doctor = await doctorModel.findOne({ userId: req.body.userId }).exec();
+    console.log(doctor.timings.startTime)
+    console.log(doctor.timings.endTime)
+    if (!doctor) {
+      // Return a 404 response with a message indicating that the doctor is not found
+      return res.status(404).send({
+        success: false,
+        message: "Doctor not found",
+      });
+    }
+
+    const formattedTimings = {
+      startTime: doctor.timings.startTime,
+      endTime: doctor.timings.endTime,
+    };
+
     res.status(200).send({
       success: true,
-      message: "doctor data fetch success",
-      data: doctor,
+      message: "Doctor data fetch success",
+      data: {
+        ...doctor._doc,
+        timings: formattedTimings,
+      },
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
       error,
-      message: "Error in Fetching Doctor Details",
+      message: "Error in fetching Doctor Details",
     });
   }
 };
+
 
 // Update Doctor Profile.........
 const updateProfileController = async (req, res) => {

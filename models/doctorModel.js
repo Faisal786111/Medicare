@@ -45,8 +45,8 @@ const doctorSchema = new mongoose.Schema(
       default: "pending",
     },
     timings: {
-      startTime: Date, 
-      endTime: Date,   
+      startTime: String, 
+      endTime: String,   
     },
   },
   { timestamps: true }

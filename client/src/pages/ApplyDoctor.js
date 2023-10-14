@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Layout from "./../components/Layout";
 import { Col, Divider, Form, Input, Row, TimePicker, message, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,12 +9,12 @@ import moment from "moment";
 
 const ApplyDoctor = () => {
   const { user } = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   //handle form
   const handleFinish = async (values) => {
+    console.log(values.timings)
     try {
       dispatch(showLoading());
       const formattedTimings = values.timings.map(time => time.format("HH:mm"));
@@ -50,7 +50,7 @@ const ApplyDoctor = () => {
   return (
     <Layout>
       <div className='backimg_1' style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', minHeight: "100%" }}>
-        <Form onFinish={handleFinish} className="register-form2">
+        <Form onFinish={handleFinish} className="register-form2"  > 
           <h3 className="text-center">{'<<<'}Apply Doctor{'>>>'}</h3>
           <hr />
           <Divider style={{ borderColor: 'black' }}>Personal Details</Divider>
