@@ -11,8 +11,8 @@ const BookingPage = () => {
   const { user } = useSelector((state) => state.user);
   const params = useParams();
   const [doctors, setDoctors] = useState([]);
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("07:20");
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState(null);
   const [isAvailable, setIsAvailable] = useState(false);
   const dispatch = useDispatch();
   // login user data
@@ -36,9 +36,7 @@ const BookingPage = () => {
   };
   // ============ handle availiblity
   const handleAvailability = async () => {
-    if (!date && !time) {
-      return alert("Date & Time Required");
-    }
+    
     try {
       // dispatch(showLoading());
       const res = await axios.post(
