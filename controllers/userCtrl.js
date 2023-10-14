@@ -242,17 +242,6 @@ const bookingAvailabilityController = async (req, res) => {
     const patients = (subTime * 60) / perPersonTime
     console.log(patients , drSTFormat.format("HH:mm") , drETFormat.format("HH:mm"))
 
-    // const currentTime = moment('11:30', 'HH:mm'); // Replace '10:00' with your time
-
-    // Add 30 minutes to the current time
-    // const newTime = currentTime.add(30, 'minutes');
-
-    // Format the new time as desired (HH:mm)
-    // const formattedTime = newTime.format('HH:mm');
-
-    // console.log(`Current Time: ${currentTime.format('HH:mm')}`);
-    // console.log(`New Time: ${formattedTime}`);
-    
     const availableTimes = [];
 
     while (drSTFormat.isBefore(drETFormat)) {
