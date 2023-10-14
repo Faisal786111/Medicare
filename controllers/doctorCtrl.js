@@ -6,8 +6,6 @@ const userModel = require("../models/userModels");
 const getDoctorInfoController = async (req, res) => {
   try {
     const doctor = await doctorModel.findOne({ userId: req.body.userId }).exec();
-    console.log(doctor.timings.startTime)
-    console.log(doctor.timings.endTime)
     if (!doctor) {
       // Return a 404 response with a message indicating that the doctor is not found
       return res.status(404).send({
