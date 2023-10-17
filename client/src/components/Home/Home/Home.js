@@ -7,10 +7,11 @@ import Header from '../Header/Header';
 import Services from '../Services/Services';
 import Testimonial from '../Testimonial/Testimonial';
 import FooterYou from '../../Shared/Footer/FooterYou';
+import "./Home.css";
 
 const Home = () => {
     return (
-        <div>
+        <div className='content-container'>
             <Header></Header>
             <Services></Services>
             <Appointment></Appointment>

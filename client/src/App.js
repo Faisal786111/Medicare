@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from './components/Home/Home/Home.js';
 import HomePage from "./pages/HomePage";
 import CommonPage from "./pages/CommonPage";
 import AdminHome from "./pages/admin/AdminHome";
@@ -100,6 +101,14 @@ function App() {
               }
             />
             <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <Home />
+                </PublicRoute>
+              }
+            />
+            <Route
               path="/appointments"
               element={
                 <ProtectedRoute>
@@ -172,7 +181,7 @@ function App() {
               }
             />
             <Route
-              path="/"
+              path="/commonPage"
               element={
                 <ProtectedRoute>
                   <CommonPage />

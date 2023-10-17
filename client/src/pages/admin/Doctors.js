@@ -2,8 +2,21 @@ import React, { useState, useEffect } from "react";
 import Layout from "./../../components/Layout";
 import axios from "axios";
 import { message, Table } from "antd";
+import Translation from '.././././../Translation/Data.json';
 
 const Doctors = () => {
+
+  //translation
+  const[language , setLanguage] = useState("english")
+  const[content , setContent] = useState({})
+  useEffect(()=>{
+      if(language=="english"){
+        setContent(Translation.english)
+      }else if(language=="hindi"){
+        setContent(Translation.hindi)
+      }
+  })
+
   const [doctors, setDoctors] = useState([]);
   //getUsers
   const getDoctors = async () => {
@@ -87,8 +100,12 @@ const Doctors = () => {
 
   return (
     <Layout>
+      <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
+                <option>english</option>
+                <option>hindi</option>
+            </select>
       <div className="backimg_1" style={{ minHeight: '100%' }}>
-        <h1 className='text-center'>{'<<<'}ALL DOCTORS LIST {'>>>'}</h1>
+        <h1 className='text-center'>{'<<<'}{content.drpage}{'>>>'}</h1>
         <Table columns={columns} dataSource={doctors} bordered style={{ border: '1px solid black', margin: '5px 10px', backgroundColor: 'lightgray' }} />
       </div>
     </Layout>

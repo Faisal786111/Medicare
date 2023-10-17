@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState , useEffect} from "react";
 import Layout from "./../components/Layout";
 import { Col, Divider, Form, Input, Row, TimePicker, message, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,8 +6,21 @@ import { useNavigate } from "react-router-dom";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from "axios";
 import moment from "moment";
+import Translation from "../Translation/Data.json";
 
 const ApplyDoctor = () => {
+
+  //translation
+  const[language , setLanguage] = useState("english")
+  const[content , setContent] = useState({})
+  useEffect(()=>{
+    if(language=="english"){
+      setContent(Translation.english)
+    }else if(language=="hindi"){
+      setContent(Translation.hindi)
+    }
+  })
+
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,74 +62,78 @@ const ApplyDoctor = () => {
   };
   return (
     <Layout>
+      <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
+                <option>english</option>
+                <option>hindi</option>
+      </select>
       <div className='backimg_1' style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', minHeight: "100%" }}>
         <Form onFinish={handleFinish} className="register-form2"  > 
-          <h3 className="text-center">{'<<<'}Apply Doctor{'>>>'}</h3>
+          <h3 className="text-center">{'<<<'}{content.applydr}{'>>>'}</h3>
           <hr />
-          <Divider style={{ borderColor: 'black' }}>Personal Details</Divider>
+          <Divider style={{ borderColor: 'black' }}>{content.personal}</Divider>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="First Name" name="firstName" required rules={[{ required: true }]}>
-                <Input type="text" placeholder="Enter First Name" required />
+              <Form.Item label={content.firstname} name="firstName" required rules={[{ required: true }]}>
+                <Input type="text" placeholder={content.placefirstname} required />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="Last Name" name="lastName" required rules={[{ required: true }]}>
-                <Input type="text" placeholder="Enter Last Name" required />
+              <Form.Item label={content.lastname} name="lastName" required rules={[{ required: true }]}>
+                <Input type="text" placeholder={content.placelastname} required />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="Phone No" name="phone" required rules={[{ required: true }]}>
-                <Input type="text" placeholder="Enter Phone-no" required />
+              <Form.Item label={content.phoneno} name="phone" required rules={[{ required: true }]}>
+                <Input type="text" placeholder={content.placephone} required />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="Email" name="email" required rules={[{ required: true }]}>
-                <Input type="email" placeholder="Enter Your Email" required />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label="Website" name="website" required rules={[{ required: true }]}>
-                <Input type="text" placeholder="Enter Your Website" required />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="Address" name="address" required rules={[{ required: true }]}>
-                <Input type="text" placeholder="Enter clinic address" required />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Divider style={{ borderColor: 'black' }}>Professional Details</Divider>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item label="Specialization" name="specialization" required rules={[{ required: true }]}>
-                <Input type="text" placeholder="Enter Your Specialization" required />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="Experience" name="experience" required rules={[{ required: true }]}>
-                <Input type="text" placeholder="Enter Your Experience" required />
+              <Form.Item label={content.email} name="email" required rules={[{ required: true }]}>
+                <Input type="email" placeholder={content.placeemail} required />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="Fees Per Cunsaltation" name="feesPerCunsaltation" required rules={[{ required: true }]}>
-                <Input type="text" placeholder="Enter Your Fees" required />
+              <Form.Item label={content.web} name="website" required rules={[{ required: true }]}>
+                <Input type="text" placeholder={content.placeweb} required />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="Timings" name="timings" required rules={[{ required: true }]}>
+              <Form.Item label={content.add} name="address" required rules={[{ required: true }]}>
+                <Input type="text" placeholder={content.placeadd} required />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Divider style={{ borderColor: 'black' }}>{content.professional}</Divider>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label={content.specification} name="specialization" required rules={[{ required: true }]}>
+                <Input type="text" placeholder={content.placespeci} required />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label={content.experi} name="experience" required rules={[{ required: true }]}>
+                <Input type="text" placeholder={content.placeexper}  required />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label={content.fee} name="feesPerCunsaltation" required rules={[{ required: true }]}>
+                <Input type="text" placeholder={content.placefee} required />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label={content.time} name="timings" required rules={[{ required: true }]}>
                 <TimePicker.RangePicker format="HH:mm" />
               </Form.Item>
             </Col>
           </Row>
           <Form.Item style={{ marginLeft: 185 }}>
-            <Button type='primary' htmlType='submit' shape='round' size='large' style={{ width: "300px" }}>Submit</Button>
+            <Button type='primary' htmlType='submit' shape='round' size='large' style={{ width: "300px" }}>{content.submitButton}</Button>
           </Form.Item>
         </Form>
       </div>
