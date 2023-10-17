@@ -52,7 +52,7 @@ const Register = () => {
           {/* <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
                 <option>english</option>
                 <option>hindi</option>
-      </select> */}
+              </select> */}
           <h3 className="text-center effect" style={{ marginBottom: 25 }}>{content.registerHeading}</h3>
           <Divider style={{ borderColor: 'black' }}></Divider>
           <Form.Item label={content.name} name="name" rules={[{ required: true, type: "name", message: "Please enter name" }]}>

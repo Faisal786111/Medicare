@@ -10,6 +10,7 @@ import med8 from "../../../images/med8.jpg";
 import med9 from "../../../images/med9.jpg";
 import med10 from "../../../images/med10.jpg";
 import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
 import { BsInstagram, BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
 import './Gallery.css';
 
@@ -28,6 +29,11 @@ const Gallery = () => {
     }
   }
 
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/login");
+  }
+
   return (
     <div className='app__gallery flex__center'>
       <div className='app__gallery-content'>
@@ -35,7 +41,7 @@ const Gallery = () => {
         <h3>Instagram</h3>
         <h1 className='headtext__cormorant'>Medical Survey</h1>
         <p className='p__opensans' style={{ color: '#AAA', marginTop: "2rem" }}>Often the people in society who are in need are the most overlooked. Society and governments aren't set up to protect everyone who needs it. That's why charities are here to fill the gaps and provide dedicated resources to help the most vulnerable.</p>
-        <Button type='primary' htmlType='submit' shape='round' size='large'>View More</Button>
+        <Button type='primary' htmlType='submit' shape='round' size='large' onClick={() => handleClick}>View More</Button>
       </div>
       <div className='app__gallery-images' style={{ border: "1px solid black" }}>
         <div className='app__gallery-images_container' ref={scrollRef}>
