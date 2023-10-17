@@ -7,6 +7,8 @@ import Header from '../Header/Header';
 import Services from '../Services/Services';
 import Testimonial from '../Testimonial/Testimonial';
 import FooterYou from '../../Shared/Footer/FooterYou';
+import Intro from "../Intro/Intro";
+import Gallery from '../Gallery/Gallery';
 import "./Home.css";
 
 const Home = () => {
@@ -15,8 +17,10 @@ const Home = () => {
             <Header></Header>
             <Services></Services>
             <Appointment></Appointment>
-            <Testimonial></Testimonial>
             <Blog></Blog>
+            <Gallery />
+            <Testimonial></Testimonial>
+            <Intro />
             <Doctor></Doctor>
             {/* <Contact></Contact> */}
             <FooterYou ></FooterYou>
