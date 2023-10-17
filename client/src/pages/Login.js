@@ -5,16 +5,18 @@ import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Translation from "../Translation/Data.json";
+import Navbar from "../components/Shared/Navbar/Navbar";
+import Footer from "../components/Shared/Footer/FooterYou";
 
 const Login = () => {
 
   //translation
-  const[language , setLanguage] = useState("english")
-  const[content , setContent] = useState({})
-  useEffect(()=>{
-    if(language=="english"){
+  const [language, setLanguage] = useState("english")
+  const [content, setContent] = useState({})
+  useEffect(() => {
+    if (language == "english") {
       setContent(Translation.english)
-    }else if(language=="hindi"){
+    } else if (language == "hindi") {
       setContent(Translation.hindi)
     }
   })
@@ -44,12 +46,13 @@ const Login = () => {
   };
   return (
     <>
+      <Navbar />
       <div className="background_image" style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
         <Form onFinish={onfinishHandler} className="register-form" >
-        <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
+          {/* <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
                 <option>english</option>
                 <option>hindi</option>
-      </select>
+              </select> */}
           <h3 className="text-center effect">{content.loginHeading}</h3>
           <hr />
           <Form.Item label={content.email} name="email" rules={[{ required: true, type: "email", message: "Please enter email" }]}>
@@ -67,6 +70,7 @@ const Login = () => {
           </Form.Item>
         </Form>
       </div>
+      <Footer />
     </>
   );
 };

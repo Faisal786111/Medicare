@@ -6,18 +6,18 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import Translation from "../Translation/Data.json";
-
+import Navbar from "../components/Shared/Navbar/Navbar";
 
 const Register = () => {
 
 
   //translation
-  const[language , setLanguage] = useState("english")
-  const[content , setContent] = useState({})
-  useEffect(()=>{
-    if(language=="english"){
+  const [language, setLanguage] = useState("english")
+  const [content, setContent] = useState({})
+  useEffect(() => {
+    if (language == "english") {
       setContent(Translation.english)
-    }else if(language=="hindi"){
+    } else if (language == "hindi") {
       setContent(Translation.hindi)
     }
   })
@@ -46,16 +46,15 @@ const Register = () => {
   };
   return (
     <>
-    
+      <Navbar />
       <div className="background_image " style={{ justifyContent: 'center', alignItems: 'center', display: 'flex' }}>
-      
         <Form onFinish={onfinishHandler} className="register-form">
-        <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
+          {/* <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
                 <option>english</option>
                 <option>hindi</option>
-      </select>
+      </select> */}
           <h3 className="text-center effect" style={{ marginBottom: 25 }}>{content.registerHeading}</h3>
-          <hr />
+          <Divider style={{ borderColor: 'black' }}></Divider>
           <Form.Item label={content.name} name="name" rules={[{ required: true, type: "name", message: "Please enter name" }]}>
             <Input type="text" placeholder="Enter your name" required />
           </Form.Item>

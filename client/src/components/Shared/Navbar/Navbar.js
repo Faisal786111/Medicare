@@ -34,47 +34,33 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav  mb-2 mb-lg-0 ms-auto ">
                         <li className="nav-item">
-                            <a className="nav-link me-3 textDark" href="#header" >HOME</a>
-                        </li>
-
-                        <li className="nav-item">
-                            <a className="nav-link me-3 textDark" href="#serviceContaint" >SERVICES</a>
-                        </li>
-
-                        <li className="nav-item">
-                            <a className="nav-link me-3 textDark" href="#reviewsContaints">REVIEWS</a>
+                            <NavLink className="nav-link me-3 textDark" to="/" >HOME</NavLink>
                         </li>
                         <li className="nav-item">
                             {/* <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="#BlogContaint">BLOG</a> */}
                             <a className="nav-link me-3 textDark" href="#BlogContaint">BLOG</a>
                         </li>
-                        {/* <li className='nav-item'>
-                            <a href='#ChatappPage' className='nav-link me-3 textDark' >CHATAPP</a>
-                        </li> */}
+                        <li className='nav-item'>
+                            <span>
+                                <NavLink className={`nav-link me-3 textDark `} to="/chat">CHATAPP</NavLink>
+                            </span>
+                        </li>
                         <li className="nav-item ">
                             <a className="nav-link me-3 textDark " href="#doctorContaints">ABOUT</a>
                         </li>
 
                         <li className="nav-item">
-                            <a href='#ContactPage' className="nav-link me-3 textDark">CONTACT</a>
-                            {/* <NavLink activeClassName="ContactPage" className="nav-link me-3" to="#ContactPage">CONTACT</NavLink> */}
+                            <span>
+                                <NavLink className={`nav-link me-3 textDark `} to="/register">REGISTER</NavLink>
+                            </span>
                         </li>
 
-
-
-
-
                         <div className="dropdown">
-
                             <li className="nav-item">
-
-
                                 <span>
                                     <NavLink className={`nav-link me-3 textDark `} to="/login">LOGIN</NavLink>
                                 </span>
-
                             </li>
-
                         </div>
                     </ul>
                 </div>

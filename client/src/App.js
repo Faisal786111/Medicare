@@ -4,6 +4,7 @@ import Home from './components/Home/Home/Home.js';
 import HomePage from "./pages/HomePage";
 import CommonPage from "./pages/CommonPage";
 import AdminHome from "./pages/admin/AdminHome";
+import Services from './components/Home/Services/Services';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ChatLogin from "./pages/ChatApp/pages/Login";
@@ -126,35 +127,19 @@ function App() {
             />
             <Route
               path="/chatlogin"
-              element={
-                <ProtectedRoute>
-                  <ChatLogin />
-                </ProtectedRoute>
-              }
+              element={<ChatLogin />}
             />
             <Route
               path="/chatregister"
-              element={
-                <ProtectedRoute>
-                  <ChatRegister />
-                </ProtectedRoute>
-              }
+              element={<ChatRegister />}
             />
             <Route
               path="/setAvatar"
-              element={
-                <ProtectedRoute>
-                  <SetAvatar />
-                </ProtectedRoute>
-              }
+              element={<SetAvatar />}
             />
             <Route
               path="/chat"
-              element={
-                <ProtectedRoute>
-                  <Chat />
-                </ProtectedRoute>
-              }
+              element={<Chat />}
             />
             <Route
               path="/medical"

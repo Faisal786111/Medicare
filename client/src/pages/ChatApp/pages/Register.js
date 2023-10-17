@@ -5,6 +5,7 @@ import Logo from "../assets/logo.svg";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import Navbar from '../../../components/Shared/Navbar/Navbar';
 import { registerRoute } from '../utils/APIRoutes';
 
 const Register = () => {
@@ -92,23 +93,26 @@ const Register = () => {
 
   return (
     <>
-      <FormContainer>
-        <form onSubmit={(event) => handleSubmit(event)}>
-          <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h1>snappy</h1>
-          </div>
-          <input type="text" placeholder="Username" name="username" onChange={(e) => handleChange(e)} />
-          <input type="email" placeholder="Email" name="email" onChange={(e) => handleChange(e)} />
-          <input type="password" placeholder="Password" name="password" onChange={(e) => handleChange(e)} />
-          <input type="password" placeholder="Confirm Password" name="confirmPassword" onChange={(e) => handleChange(e)} />
-          <button type="submit">Create User</button>
-          <span>
-            Already have an account ? <NavLink to="/chatlogin">Login.</NavLink>
-          </span>
-        </form>
-      </FormContainer>
-      <ToastContainer />
+      <Navbar />
+      <div className="chatBackImage">
+        <FormContainer>
+          <form onSubmit={(event) => handleSubmit(event)}>
+            <div className="brand">
+              <img src={Logo} alt="logo" />
+              <h2>ChatApp</h2>
+            </div>
+            <input type="text" placeholder="Username" name="username" onChange={(e) => handleChange(e)} />
+            <input type="email" placeholder="Email" name="email" onChange={(e) => handleChange(e)} />
+            <input type="password" placeholder="Password" name="password" onChange={(e) => handleChange(e)} />
+            <input type="password" placeholder="Confirm Password" name="confirmPassword" onChange={(e) => handleChange(e)} />
+            <button type="submit">Create User</button>
+            <span>
+              Already have an account ? <NavLink to="/chatlogin">Login.</NavLink>
+            </span>
+          </form>
+        </FormContainer>
+        <ToastContainer />
+      </div>
     </>
   )
 }
@@ -121,16 +125,15 @@ const FormContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
   .brand {
     display: flex;
     align-items: center;
     gap: 1rem;
     justify-content: center;
     img {
-      height: 5rem;
+      height: 3rem;
     }
-    h1 {
+    h2 {
       color: white;
       text-transform: uppercase;
     }
@@ -139,10 +142,10 @@ const FormContainer = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     background-color: #00000076;
     border-radius: 2rem;
-    padding: 3rem 5rem;
+    padding: 1rem 5rem;
   }
   input {
     background-color: transparent;
