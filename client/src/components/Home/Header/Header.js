@@ -9,7 +9,6 @@ const Header = () => {
     return (
         <header>
             <Navbar></Navbar>
-            <Divider style={{ borderColor: 'black' }}></Divider>
             <HeaderTop></HeaderTop>
             <BusinessInfo></BusinessInfo>
         </header>
