@@ -236,11 +236,11 @@ const bookingAvailabilityController = async (req, res) => {
     const drStartTime = parseFloat(startTime)
     const drEndTime = parseFloat(endTime)
     const subTime = drEndTime - drStartTime
-    const drSTFormat = moment(drStartTime,"HH:mm")
+    const drSTFormat = moment(drStartTime, "HH:mm")
     const drETFormat = moment(drEndTime, "HH:mm")
 
     const patients = (subTime * 60) / perPersonTime
-    console.log(patients , drSTFormat.format("HH:mm") , drETFormat.format("HH:mm"))
+    console.log(patients, drSTFormat.format("HH:mm"), drETFormat.format("HH:mm"))
 
     const availableTimes = [];
 
@@ -249,15 +249,15 @@ const bookingAvailabilityController = async (req, res) => {
     //   drSTFormat.add("00:30"); // Add 30 minutes to drSTFormat
     // }
 
-    
+
     while (drSTFormat.isBefore(drETFormat)) {
       const startTime = drSTFormat.format("HH:mm");
       drSTFormat.add("00:30"); // Add 30 minutes to drSTFormat
       const endTime = drSTFormat.format("HH:mm");
-      
+
       availableTimes.push(`${startTime} - ${endTime}`);
     }
-    
+
     console.log(availableTimes)
     availableTimes.forEach((timeRange, index) => {
       console.log(`Slot ${index + 1}: ${timeRange}`);
@@ -331,6 +331,26 @@ const userAppointmentsController = async (req, res) => {
   }
 };
 
+//Get all users for blog....
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await userModel.find({});
+    return res.status(200).send({
+      userCount: users.length,
+      success: true,
+      message: "all users data",
+      users,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Error In Get ALl Users",
+      error,
+    });
+  }
+};
+
 module.exports = {
   loginController,
   registerController,
@@ -342,4 +362,5 @@ module.exports = {
   bookeAppointmnetController,
   bookingAvailabilityController,
   userAppointmentsController,
+  getAllUsers,
 };

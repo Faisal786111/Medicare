@@ -29,7 +29,13 @@ const userSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
-});
+  blogs: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Blog"
+    }
+  ],
+}, { timestamps: true });
 
 const userModel = mongoose.model("users", userSchema);
 
