@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import Layout from "../components/Layout";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -8,21 +8,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import { Table } from "antd";
 import DataTable from 'react-data-table-component';
+import "./BookingPage.css"
+import { current } from "@reduxjs/toolkit";
 
 
 const BookingPage = () => {
 
-  const currentDate = new Date();
+  // const currentDate = new Date();
+  const [updateDate , forceUpdate] = useReducer(x => x + 1 , 0)
   const { user } = useSelector((state) => state.user);
   const params = useParams();
   const [doctors, setDoctors] = useState([]);
-  const [date, setDate] = useState(moment(currentDate, "DD-MM-YYYY").format("DD-MM-YYYY"));
+  const [currentDate , setCurrentDate] = useState(moment(new Date(), 'DD-MM-YYYY'))
+  const [date, setDate] = useState(moment(currentDate, "DD-MM-YYYY").format('DD-MM-YYYY'));
   const [time, setTime] = useState(null);
   const [isAvailable, setIsAvailable] = useState(false);
   const [availableTime, setAvailableTime] = useState([])
   const [appointments, setAppointments] = useState([])
   const dispatch = useDispatch();
-  const [arr, setArr] = React.useState([]);
+  // const [arr, setArr] = React.useState([]);
 
   // login user data
 
@@ -107,6 +111,7 @@ const BookingPage = () => {
   const handleBooking = async (row) => {
     try {
       console.log(row.timeSlot)
+      handleAvailability(date)
       setIsAvailable(true);
       if (!date) {
         return alert("Date Required");
@@ -132,6 +137,8 @@ const BookingPage = () => {
       if (res.data.success) {
         message.success(res.data.message);
       }
+
+
     } catch (error) {
       dispatch(hideLoading());
       console.log(error);
@@ -165,13 +172,14 @@ const BookingPage = () => {
     {
       name: 'Availability',
       cell: (row) => {
+        const isBooked = appointments.find(appointment => appointment.time === row.timeSlot)
         return (
-          appointments[row.id-1]?.time === row.timeSlot ? (
-            <button disabled>Booked</button>
+          isBooked ? (
+            <button  className="btn button " style={{ cursor: 'not-allowed'  }}  disabled>Booked</button>
           ) : (
             <button
               onClick={() => handleBooking(row)}
-              className="btn btn-primary"
+              className="btn btn-primary  " style={{width : "100px" , cursor:"pointer"}}
             >
               Book Now
             </button>
@@ -201,7 +209,7 @@ const BookingPage = () => {
                 {<div className="d-flex flex-column w-75" style={{ marginLeft: 80 }}>
                   <DatePicker
                     aria-required="true"
-                    defaultValue={moment(currentDate, 'DD-MM-YYYY')}
+                    defaultValue={currentDate}
                     className="m-2"
                     format="DD-MM-YYYY"
                     onChange={(value) => dateChange(value.format("DD-MM-YYYY"))}
@@ -213,7 +221,6 @@ const BookingPage = () => {
                   columns={col}
                   data={arrayOfObjects}
                   customStyles={customStyles} // Apply custom styles
-
                 />
 
               </div>
