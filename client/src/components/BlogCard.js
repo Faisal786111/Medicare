@@ -12,8 +12,6 @@ import { Box, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
-
 export default function BlogCard({ title, description, image, username, time, id, isUser }) {
     const navigate = useNavigate();
     const handleEdit = () => {
@@ -31,11 +29,15 @@ export default function BlogCard({ title, description, image, username, time, id
         }
     }
     return (
-        <Card sx={{
-            width: '40%', margin: 'auto', mt: 2, padding: 2, boxShadow: '5px 5px 10px #ccc', ":hover:": {
-                boxShadow: '10px 10px 20px #ccc'
-            }
-        }}>
+        <Card
+            sx={{
+                width: '30%', margin: 'auto', mt: 2, padding: 2, boxShadow: '5px 5px 10px #ccc', transition: '0.3s', // Add a transition for smooth hover effect
+                ':hover': {
+                    boxShadow: '10px 10px 20px #ccc',
+                    border: '1px solid blue',
+                },
+            }}
+        >
             {isUser && (
                 <Box display={'flex'}>
                     <IconButton onClick={handleEdit} sx={{ marginLeft: "auto" }}>

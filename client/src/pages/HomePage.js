@@ -11,13 +11,13 @@ const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
 
   //pagination purpose 
-  const [currentPage , setCurrentPage] = useState(2)
-  const [postPerPage , setPostPerPage] = useState(3)
+  const [currentPage, setCurrentPage] = useState(2)
+  const [postPerPage, setPostPerPage] = useState(3)
 
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
 
-  const currentPosts = doctors.slice(firstPostIndex, lastPostIndex)
+  const currentPosts = doctors.slice(firstPostIndex, lastPostIndex);
 
   // login user data
   const getUserData = async () => {
@@ -46,14 +46,14 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <div className='backimg_1  ' style={{ minHeight: "100%" ,  }}>
+      <div className='backimg_1  ' style={{ minHeight: "100%", }}>
         {/* <h3 className='text-center'>{'<<<'}Doctors don't just treat illnesses; they heal with their expertise and care{'>>>'}</h3> */}
-        <Row style={{marginTop:45}}>
+        <Row style={{ marginTop: 45 }}>
           {currentPosts && currentPosts.map((doctor) => <DoctorList doctor={doctor} />)}
-          
+
         </Row>
-        <div className="d-flex justify-content-center " style={{marginTop:"50px", alignItems:"center"}} >
-          <Pagination totalPosts={doctors.length} postPerPage={postPerPage} setCurrentPage={setCurrentPage}/>
+        <div className="d-flex justify-content-center " style={{ marginTop: "50px", alignItems: "center" }} >
+          <Pagination totalPosts={doctors.length} postPerPage={postPerPage} setCurrentPage={setCurrentPage} />
         </div>
       </div>
     </Layout>

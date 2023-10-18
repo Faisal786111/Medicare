@@ -89,7 +89,7 @@ const Login = () => {
             </div>
             <input type="text" placeholder="Username" name="username" onChange={(e) => handleChange(e)} min="3" />
             <input type="password" placeholder="Password" name="password" onChange={(e) => handleChange(e)} />
-            <button type="submit">Login In</button>
+            <button type="submit">Login</button>
             <span>
               Don't have an account ? <NavLink to="/chatregister">Register.</NavLink>
             </span>

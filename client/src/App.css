@@ -106,7 +106,7 @@
     min-height: 100%;
     width: 300px;
     border-radius: 5px;
-    background-color: rgba(51, 1, 1);
+    background-color: rgb(1, 24, 51);
     box-shadow: 0 0 2px gray;
     margin-right: 20px;
     color: white;
@@ -299,3 +299,10 @@
     width: 100w;
 }
 
+.blogBackImage {
+    background-image: url("./images/back5.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 87vh;
+    width: 100w;
+}

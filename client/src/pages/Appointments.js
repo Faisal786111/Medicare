@@ -8,12 +8,12 @@ import Translation from "../Translation/Data.json";
 const Appointments = () => {
 
   //translation
-  const[language , setLanguage] = useState("english")
-  const[content , setContent] = useState({})
-  useEffect(()=>{
-    if(language=="english"){
+  const [language, setLanguage] = useState("english")
+  const [content, setContent] = useState({})
+  useEffect(() => {
+    if (language == "english") {
       setContent(Translation.english)
-    }else if(language=="hindi"){
+    } else if (language == "hindi") {
       setContent(Translation.hindi)
     }
   })
@@ -77,10 +77,10 @@ const Appointments = () => {
 
   return (
     <Layout>
-      <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
+      {/* <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
                 <option>english</option>
                 <option>hindi</option>
-      </select>
+      </select> */}
       <div className="backimg_1" style={{ minHeight: '100%' }}>
         <h1 className="text-center">{'<<<'}{content.appoinmentHeading}{'>>>'}</h1>
         <Table columns={columns} dataSource={appointments} bordered style={{ border: '1px solid black', margin: '5px 10px', backgroundColor: 'lightgray' }} />

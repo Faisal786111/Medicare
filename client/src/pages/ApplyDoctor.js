@@ -1,4 +1,4 @@
-import React,{useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "./../components/Layout";
 import { Col, Divider, Form, Input, Row, TimePicker, message, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,12 +11,12 @@ import Translation from "../Translation/Data.json";
 const ApplyDoctor = () => {
 
   //translation
-  const[language , setLanguage] = useState("english")
-  const[content , setContent] = useState({})
-  useEffect(()=>{
-    if(language=="english"){
+  const [language, setLanguage] = useState("english")
+  const [content, setContent] = useState({})
+  useEffect(() => {
+    if (language == "english") {
       setContent(Translation.english)
-    }else if(language=="hindi"){
+    } else if (language == "hindi") {
       setContent(Translation.hindi)
     }
   })
@@ -62,12 +62,12 @@ const ApplyDoctor = () => {
   };
   return (
     <Layout>
-      <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
+      {/* <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
                 <option>english</option>
                 <option>hindi</option>
-      </select>
+      </select> */}
       <div className='backimg_1' style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', minHeight: "100%" }}>
-        <Form onFinish={handleFinish} className="register-form2"  > 
+        <Form onFinish={handleFinish} className="register-form2"  >
           <h3 className="text-center">{'<<<'}{content.applydr}{'>>>'}</h3>
           <hr />
           <Divider style={{ borderColor: 'black' }}>{content.personal}</Divider>
@@ -116,7 +116,7 @@ const ApplyDoctor = () => {
             </Col>
             <Col span={12}>
               <Form.Item label={content.experi} name="experience" required rules={[{ required: true }]}>
-                <Input type="text" placeholder={content.placeexper}  required />
+                <Input type="text" placeholder={content.placeexper} required />
               </Form.Item>
             </Col>
           </Row>
