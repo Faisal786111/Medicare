@@ -6,7 +6,8 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { loginRoute } from '../utils/APIRoutes';
-
+import Navbar from '../../../components/Shared/Navbar/Navbar';
+import Footer from "../../../components/Shared/Footer/FooterYou";
 
 const Login = () => {
 
@@ -78,21 +79,25 @@ const Login = () => {
 
   return (
     <>
-      <FormContainer>
-        <form onSubmit={(event) => handleSubmit(event)}>
-          <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h1>snappy</h1>
-          </div>
-          <input type="text" placeholder="Username" name="username" onChange={(e) => handleChange(e)} min="3" />
-          <input type="password" placeholder="Password" name="password" onChange={(e) => handleChange(e)} />
-          <button type="submit">Login In</button>
-          <span>
-            Don't have an account ? <NavLink to="/chatregister">Register.</NavLink>
-          </span>
-        </form>
-      </FormContainer>
-      <ToastContainer />
+      <Navbar />
+      <div className="chatBackImage">
+        <FormContainer>
+          <form onSubmit={(event) => handleSubmit(event)}>
+            <div className="brand">
+              <img src={Logo} alt="logo" />
+              <h2>ChatApp</h2>
+            </div>
+            <input type="text" placeholder="Username" name="username" onChange={(e) => handleChange(e)} min="3" />
+            <input type="password" placeholder="Password" name="password" onChange={(e) => handleChange(e)} />
+            <button type="submit">Login</button>
+            <span>
+              Don't have an account ? <NavLink to="/chatregister">Register.</NavLink>
+            </span>
+          </form>
+        </FormContainer>
+        <ToastContainer />
+      </div>
+      <Footer />
     </>
   )
 }
@@ -105,16 +110,16 @@ const FormContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
+  
   .brand {
     display: flex;
     align-items: center;
     gap: 1rem;
     justify-content: center;
     img {
-      height: 5rem;
+      height: 4rem;
     }
-    h1 {
+    h2 {
       color: white;
       text-transform: uppercase;
     }
@@ -124,7 +129,7 @@ const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    background-color: #00000076;
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 2rem;
     padding: 3rem 5rem;
   }

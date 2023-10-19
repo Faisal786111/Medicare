@@ -166,7 +166,7 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       .content {
-        max-width: 40%;
+        max-width: 30%;
         overflow-wrap: break-word;
         padding: 1rem;
         font-size: 1.1rem;

@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from './components/Home/Home/Home.js';
 import HomePage from "./pages/HomePage";
 import CommonPage from "./pages/CommonPage";
 import AdminHome from "./pages/admin/AdminHome";
@@ -11,6 +12,10 @@ import SetAvatar from "./components/SetAvatar";
 import Chat from "./pages/ChatApp/pages/Chat";
 import Chatbot from "./pages/Chatbot";
 import Medical from './pages/Medical';
+import Blogs from "./pages/Blogs/Pages/Blogs";
+import CreateBlog from './pages/Blogs/Pages/CreateBlog';
+import BlogDetails from './pages/Blogs/Pages/BlogDetails';
+import UserBlogs from './pages/Blogs/Pages/UserBlogs';
 import DoctorHome from "./pages/doctor/DoctorHome";
 import { useSelector } from "react-redux";
 import Spinner from "./components/Spinner";
@@ -100,6 +105,14 @@ function App() {
               }
             />
             <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <Home />
+                </PublicRoute>
+              }
+            />
+            <Route
               path="/appointments"
               element={
                 <ProtectedRoute>
@@ -117,35 +130,19 @@ function App() {
             />
             <Route
               path="/chatlogin"
-              element={
-                <ProtectedRoute>
-                  <ChatLogin />
-                </ProtectedRoute>
-              }
+              element={<ChatLogin />}
             />
             <Route
               path="/chatregister"
-              element={
-                <ProtectedRoute>
-                  <ChatRegister />
-                </ProtectedRoute>
-              }
+              element={<ChatRegister />}
             />
             <Route
               path="/setAvatar"
-              element={
-                <ProtectedRoute>
-                  <SetAvatar />
-                </ProtectedRoute>
-              }
+              element={<SetAvatar />}
             />
             <Route
               path="/chat"
-              element={
-                <ProtectedRoute>
-                  <Chat />
-                </ProtectedRoute>
-              }
+              element={<Chat />}
             />
             <Route
               path="/medical"
@@ -172,7 +169,7 @@ function App() {
               }
             />
             <Route
-              path="/"
+              path="/commonPage"
               element={
                 <ProtectedRoute>
                   <CommonPage />
@@ -192,6 +189,38 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AdminHome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/blogs"
+              element={
+                <ProtectedRoute>
+                  <Blogs />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my-blogs"
+              element={
+                <ProtectedRoute>
+                  <UserBlogs />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/blog-details/:id"
+              element={
+                <ProtectedRoute>
+                  <BlogDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/create-blog"
+              element={
+                <ProtectedRoute>
+                  <CreateBlog />
                 </ProtectedRoute>
               }
             />

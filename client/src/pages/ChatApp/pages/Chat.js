@@ -60,19 +60,21 @@ const Chat = () => {
   }
 
   return (
-    <Container>
-      <div className='container'>
-        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handeChatChange} />
-        {
-          isLoaded && currentChat === undefined ?
-            (
-              <Welcome currentUser={currentUser} />
-            ) : (
-              <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />
-            )
-        }
-      </div>
-    </Container>
+    <div className='chatBackImage'>
+      <Container>
+        <div className='container'>
+          <Contacts contacts={contacts} currentUser={currentUser} changeChat={handeChatChange} />
+          {
+            isLoaded && currentChat === undefined ?
+              (
+                <Welcome currentUser={currentUser} />
+              ) : (
+                <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />
+              )
+          }
+        </div>
+      </Container>
+    </div>
   )
 }
 
@@ -84,9 +86,9 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
   .container {
     height: 85vh;
+    border-radius: 1rem;
     width: 85vw;
     background-color: #00000076;
     display: grid;

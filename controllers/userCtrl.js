@@ -213,8 +213,6 @@ const bookeAppointmnetController = async (req, res) => {
 // booking bookingAvailabilityController
 const bookingAvailabilityController = async (req, res) => {
   try {
-   
-
 
     const date = moment(req.body.date, "DD-MM-YYYY").format("DD-MM-YYYY");
     // const inputDate = req.body.date;
@@ -309,6 +307,7 @@ const bookingAvailabilityController = async (req, res) => {
     //     message: "Appointments available",
     //   });
     // }
+
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -326,7 +325,7 @@ const userAppointmentsController = async (req, res) => {
     });
     res.status(200).send({
       success: true,
-      message: "Users Appointments Fetch SUccessfully",
+      message: "Users Appointments Fetch Successfully",
       data: appointments,
     });
   } catch (error) {
@@ -335,6 +334,26 @@ const userAppointmentsController = async (req, res) => {
       success: false,
       error,
       message: "Error In User Appointments",
+    });
+  }
+};
+
+//Get all users for blog....
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await userModel.find({});
+    return res.status(200).send({
+      userCount: users.length,
+      success: true,
+      message: "all users data",
+      users,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Error In Get ALl Users",
+      error,
     });
   }
 };
@@ -350,4 +369,5 @@ module.exports = {
   bookeAppointmnetController,
   bookingAvailabilityController,
   userAppointmentsController,
+  getAllUsers,
 };

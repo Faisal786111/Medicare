@@ -24,6 +24,16 @@ export const userMenu = [
     path: "/medical",
     icon: "fa-solid fa-user",
   },
+  {
+    name: "CreateBlog",
+    path: "/create-blog",
+    icon: "fa-solid fa-user",
+  },
+  {
+    name: "MyBlogs",
+    path: "/my-blogs",
+    icon: "fa-solid fa-user",
+  },
 ];
 
 // admin menu
