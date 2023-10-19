@@ -182,9 +182,11 @@ const getAllDocotrsController = async (req, res) => {
 //BOOK APPOINTMENT
 const bookeAppointmnetController = async (req, res) => {
   try {
-    req.body.date = moment(req.body.date, "DD-MM-YYYY").toISOString();
-    req.body.time = moment(req.body.time, "HH:mm").toISOString();
+
+    // req.body.date = moment(req.body.date, "DD-MM-YYYY").toISOString();
+    // req.body.time = moment(req.body.time, "HH:mm").toISOString();
     req.body.status = "pending";
+    console.log(req.body.time)
     const newAppointment = new appointmentModel(req.body);
     await newAppointment.save();
     const user = await userModel.findOne({ _id: req.body.doctorInfo.userId });
@@ -211,96 +213,101 @@ const bookeAppointmnetController = async (req, res) => {
 // booking bookingAvailabilityController
 const bookingAvailabilityController = async (req, res) => {
   try {
-    // const requestedDate = moment(req.body.date,"DD-MM-YYYY").toISOString();
-    // var dateString = '07-15-2016';
-    // var momentObj = moment(dateString, 'MM-DD-YYYY').format('DD-MM-YYYY');
-    // console.log(momentObj)
 
-
-    const date = req.body.date;
-    const inputDate = req.body.date;
-    const requestedDate = moment(inputDate, 'DD-MM-YYYY').format('DD-MM-YYYY');
-    const time = req.body.time;
-    const curr = '14-10-2023';
-    const currentDate = moment(curr, 'DD-MM-YYYY').format('DD-MM-YYYY');
+    const date = moment(req.body.date, "DD-MM-YYYY").format("DD-MM-YYYY");
+    // const inputDate = req.body.date;
+    // const requestedDate = moment(inputDate, 'DD-MM-YYYY').format('DD-MM-YYYY');
+    // const time = req.body.time;
+    // const curr = '14-10-2023';
+    // const currentDate = moment(curr, 'DD-MM-YYYY').format('DD-MM-YYYY');
     const doctorId = req.body.doctorId;
 
-    //fetching doctor's data
-    const doctor = await doctorModel.findOne({ doctorId })
-    const startTime = doctor.timings.startTime;
-    const endTime = doctor.timings.endTime;
-    const inputTime = time;
+    // //fetching doctor's date
+    // const doctor = await doctorModel.findOne({ doctorId })
+    // const startTime = doctor.timings.startTime;
+    // const endTime = doctor.timings.endTime;
+    // const inputTime = time;
 
-    //logic for perPersonTime 
-    const perPersonTime = 30;
-    const drStartTime = parseFloat(startTime)
-    const drEndTime = parseFloat(endTime)
-    const subTime = drEndTime - drStartTime
-    const drSTFormat = moment(drStartTime, "HH:mm")
-    const drETFormat = moment(drEndTime, "HH:mm")
+    // //logic for perPersonTime 
+    // const perPersonTime = 30;
+    // const drStartTime = parseFloat(startTime)
+    // const drEndTime = parseFloat(endTime)
+    // const subTime = drEndTime - drStartTime
+    // const drSTFormat = moment(drStartTime,"HH:mm")
+    // const drETFormat = moment(drEndTime, "HH:mm")
 
-    const patients = (subTime * 60) / perPersonTime
-    console.log(patients, drSTFormat.format("HH:mm"), drETFormat.format("HH:mm"))
+    // const patients = (subTime * 60) / perPersonTime
+    // console.log(patients , drSTFormat.format("HH:mm") , drETFormat.format("HH:mm"))
 
-    const availableTimes = [];
+    // const availableTimes = [];
 
     // while (drSTFormat.isSameOrBefore(drETFormat)) {
     //   availableTimes.push(drSTFormat.format("HH:mm"));
     //   drSTFormat.add("00:30"); // Add 30 minutes to drSTFormat
     // }
 
+    
+    // while (drSTFormat.isBefore(drETFormat)) {
+    //   const startTime = drSTFormat.format("HH:mm");
+    //   drSTFormat.add("00:30"); // Add 30 minutes to drSTFormat
+    //   const endTime = drSTFormat.format("HH:mm");
+      
+    //   availableTimes.push(`${startTime} - ${endTime}`);
+    // }
+    
+    // console.log(availableTimes)
+    // availableTimes.forEach((timeRange, index) => {
+      // console.log(`Slot ${index + 1}: ${timeRange}`);
+    // });
 
-    while (drSTFormat.isBefore(drETFormat)) {
-      const startTime = drSTFormat.format("HH:mm");
-      drSTFormat.add("00:30"); // Add 30 minutes to drSTFormat
-      const endTime = drSTFormat.format("HH:mm");
 
-      availableTimes.push(`${startTime} - ${endTime}`);
-    }
+    // if (date == null || time == null) {
+    //   return res.status(200).send({
+    //     message: "Please choose proper date && time",
+    //     success: false,
+    //   });
+    // }
 
-    console.log(availableTimes)
-    availableTimes.forEach((timeRange, index) => {
-      console.log(`Slot ${index + 1}: ${timeRange}`);
-    });
+    // if (inputTime < startTime || inputTime > endTime) {
+    //   return res.status(200).send({
+    //     message: "Please choose proper time between doctor's availability",
+    //     success: false,
+    //   });
+    // }
 
-
-    if (date == null || time == null) {
-      return res.status(200).send({
-        message: "Please choose proper date && time",
-        success: false,
-      });
-    }
-
-    if (inputTime < startTime || inputTime > endTime) {
-      return res.status(200).send({
-        message: "Please choose proper time between doctor's availability",
-        success: false,
-      });
-    }
+    console.log(date)
 
     const appointments = await appointmentModel.find({
       doctorId,
-      date,
-      time
+      date
     });
+    console.log(appointments)
+    res.status(200).send({
+      success: true,
+      message: "Appointments",
+      data   : appointments,
+    });
+    
 
-    if (requestedDate < currentDate) {
-      return res.status(200).send({
-        message: "Appointments not Availibale at this time",
-        success: false,
-      });
-    }
-    if (appointments.length > 0) {
-      return res.status(200).send({
-        message: "Appointments not Availibale at this time",
-        success: false,
-      });
-    } else {
-      return res.status(200).send({
-        success: true,
-        message: "Appointments available",
-      });
-    }
+
+    // if (requestedDate < currentDate) {
+    //   return res.status(200).send({
+    //     message: "Appointments not Availibale at this time",
+    //     success: false,
+    //   });
+    // }
+    // if (appointments.length > 0) {
+    //   return res.status(200).send({
+    //     message: "Appointments not Availibale at this time",
+    //     success: false,
+    //   });
+    // }//  else {
+    //   return res.status(200).send({
+    //     success: true,
+    //     message: "Appointments available",
+    //   });
+    // }
+
   } catch (error) {
     console.log(error);
     res.status(500).send({

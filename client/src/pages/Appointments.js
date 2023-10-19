@@ -64,8 +64,8 @@ const Appointments = () => {
       dataIndex: "date",
       render: (text, record) => (
         <span>
-          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
-          {moment(record.time).format("HH:mm")}
+          {record.date}&nbsp;
+          {record.time}
         </span>
       ),
     },
@@ -73,6 +73,7 @@ const Appointments = () => {
       title: "Status",
       dataIndex: "status",
     },
+    
   ];
 
   return (

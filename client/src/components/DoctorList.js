@@ -17,7 +17,7 @@ const DoctorList = ({ doctor }) => {
           <Divider style={{ borderColor: 'black' }}></Divider>
           <p style={{ fontSize: 20, color: 'black' }}><b>Fees Per Cunsaltation</b> {doctor.feesPerCunsaltation}</p>
           <Divider style={{ borderColor: 'black' }}></Divider>
-          <p style={{ fontSize: 20, color: 'black' }}><b>Timings</b> {doctor.timings[0]} - {doctor.timings[1]}</p>
+          <p style={{ fontSize: 20, color: 'black' }}><b>Timings</b> {doctor.timings.startTime} - {doctor.timings.endTime}</p>
         </div>
       </Card>
     </>
