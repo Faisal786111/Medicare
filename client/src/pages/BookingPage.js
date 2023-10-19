@@ -73,7 +73,7 @@ const BookingPage = () => {
       console.log(error);
     }
   };
-  // ============ handle availiblity
+  
   const handleAvailability = async (newDate) => {
     const todayDate = moment(new Date(), 'DD-MM-YYYY').format("DD-MM-YYYY");
     if(newDate<todayDate)
@@ -85,7 +85,6 @@ const BookingPage = () => {
 
     getUserData();
     console.log("use stage",newDate);
-    
 
     try {
       // dispatch(showLoading());
