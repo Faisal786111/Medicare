@@ -15,17 +15,18 @@ import { current } from "@reduxjs/toolkit";
 const BookingPage = () => {
 
   // const currentDate = new Date();
-  const [updateDate , forceUpdate] = useReducer(x => x + 1 , 0)
+  const [updateDate, forceUpdate] = useReducer(x => x + 1, 0)
   const { user } = useSelector((state) => state.user);
   const params = useParams();
   const [doctors, setDoctors] = useState([]);
-  const [currentDate , setCurrentDate] = useState(moment(new Date(), 'DD-MM-YYYY'))
+  const [currentDate, setCurrentDate] = useState(moment(new Date(), 'DD-MM-YYYY'))
   const [date, setDate] = useState(moment(currentDate, "DD-MM-YYYY").format('DD-MM-YYYY'));
   const [time, setTime] = useState(null);
   const [isAvailable, setIsAvailable] = useState(false);
   const [availableTime, setAvailableTime] = useState([])
   const [appointments, setAppointments] = useState([])
   const dispatch = useDispatch();
+  const [isBooked1, setIsBooked] = useState(true)
   // const [arr, setArr] = React.useState([]);
 
   // login user data
@@ -58,7 +59,7 @@ const BookingPage = () => {
       );
       if (res.data.success) {
         setDoctors(res.data.data.doctor);
-        console.log("Doctors ########:",doctors)
+        console.log("Doctors ########:", doctors)
 
         // const times = res.data.data.availableTimes; // Assuming this contains the times array
         // const mergedArray = [...availableTimes, ...times];
@@ -74,31 +75,42 @@ const BookingPage = () => {
   };
   // ============ handle availiblity
   const handleAvailability = async (newDate) => {
+    const todayDate = moment(new Date(), 'DD-MM-YYYY').format("DD-MM-YYYY");
+    if(newDate<todayDate)
+    {
+      setAvailableTime([])
+      message.error("You cannot select previouse date")
+      return;
+    }
+
+    getUserData();
+    console.log("use stage",newDate);
+    
 
     try {
       // dispatch(showLoading());
       const res = await axios.post(
         "/api/v1/user/booking-availbility",
-        { doctorId: params.doctorId, date : newDate },
+        { doctorId: params.doctorId, date: newDate },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
-     
+
       if (res.data.success) {
-        setIsAvailable(true);
+        //setIsAvailable(true);
         setAppointments(res.data.data)  // when res.data.data is updated then log the appointments
         console.log("Appointment:", res.data.data);
-          // setAppointments((prevAppointments) => {
-          //   console.log("Previous Appointments:", prevAppointments);
-          //   return res.data.data; // Set the new value of appointments
-          // });
-        
+        // setAppointments((prevAppointments) => {
+        //   console.log("Previous Appointments:", prevAppointments);
+        //   return res.data.data; // Set the new value of appointments
+        // });
+
         //console.log("Appointment:", appointments)
         //console.log("Appointment:", res.data.data);
-        message.success(res.data.message);
+        //message.success(res.data.message);
       } else {
         message.error(res.data.message);
       }
@@ -110,9 +122,11 @@ const BookingPage = () => {
   // =============== booking function==========================
   const handleBooking = async (row) => {
     try {
+      
+
       console.log(row.timeSlot)
-      handleAvailability(date)
-      setIsAvailable(true);
+      //handleAvailability(date)
+      //setIsAvailable(true);
       if (!date) {
         return alert("Date Required");
       }
@@ -138,6 +152,20 @@ const BookingPage = () => {
         message.success(res.data.message);
       }
 
+      console.log("booking date",appointments[0].date)
+      const res1 = await axios.post(
+        "/api/v1/user/booking-availbility",
+        { doctorId: params.doctorId, date: appointments[0].date },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      setAppointments(res1.data.data)
+
+
 
     } catch (error) {
       dispatch(hideLoading());
@@ -159,10 +187,13 @@ const BookingPage = () => {
   }));
 
   const dateChange = (newDate) => {
-    setDate(newDate)
+    console.log("current Date",currentDate)
+    const myDate = moment(newDate, "DD-MM-YYYY").format('DD-MM-YYYY')
+    setDate(myDate)
     handleAvailability(newDate)
   }
 
+  
   const col = [
     {
       name: 'Time Slot',
@@ -174,6 +205,7 @@ const BookingPage = () => {
       cell: (row) => {
         const isBooked = appointments.find(appointment => appointment.time === row.timeSlot)
         return (
+          
           isBooked ? (
             <button  className="btn button " style={{ cursor: 'not-allowed'  }}  disabled>Booked</button>
           ) : (
@@ -184,10 +216,17 @@ const BookingPage = () => {
               Book Now
             </button>
           )
+          // <button
+          //   onClick={() => handleBooking(row)}
+          //   className={`btn ${ isBooked ? 'btn-secondary button' : 'btn-primary '}`}
+          //   disabled={isBooked}
+          // >
+          //   {isBooked ? 'Booked' : 'Book Now'}
+          // </button>
         );
       },
     }
-    
+
   ];
 
   return (
@@ -199,18 +238,19 @@ const BookingPage = () => {
           <Card className='fant' style={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
             {doctors && (
               <div className="border border-black text-center">
-                <h4>Dr.{doctors.firstName} heil {doctors.lastName} {availableTime} </h4>
+                <h4>Dr.{doctors.firstName} {doctors.lastName}  </h4>
                 <h4>Fees : {doctors.feesPerCunsaltation}</h4>
                 <h4>
                   Timings : {doctors.timings && doctors.timings.startTime} -{" "}
                   {doctors.timings && doctors.timings.endTime}{" "}
                 </h4>
                 <Divider style={{ borderColor: 'black' }}></Divider>
-                {<div className="d-flex flex-column w-75" style={{ marginLeft: 80 }}>
+                {<div className="d-flex flex-row align-items-center" style={{ marginLeft: 80, alignContent:"flex-start" }}>
+                  <h5>Choose Appointment Date:</h5>
                   <DatePicker
                     aria-required="true"
                     defaultValue={currentDate}
-                    className="m-2"
+                    className="m-2" style={{width:"50%"}}
                     format="DD-MM-YYYY"
                     onChange={(value) => dateChange(value.format("DD-MM-YYYY"))}
                   />
