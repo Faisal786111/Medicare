@@ -72,7 +72,7 @@ const getDoctorByIdController = async (req, res) => {
     const drStartTime = parseFloat(startTime)
     const drEndTime = parseFloat(endTime)
     const subTime = drEndTime - drStartTime
-    const drSTFormat = moment(drStartTime,"HH:mm")
+    const drSTFormat = moment(drStartTime, "HH:mm")
     const drETFormat = moment(drEndTime, "HH:mm")
 
 
@@ -81,7 +81,7 @@ const getDoctorByIdController = async (req, res) => {
       const startTime = drSTFormat.format("HH:mm");
       drSTFormat.add("00:30"); // Add 30 minutes to drSTFormat
       const endTime = drSTFormat.format("HH:mm");
-      
+
       availableTimes.push(`${startTime} - ${endTime}`);
     }
     console.log(availableTimes)
@@ -91,7 +91,7 @@ const getDoctorByIdController = async (req, res) => {
     res.status(200).send({
       success: true,
       message: "Sigle Doc Info Fetched",
-      data   : {doctor,availableTimes},
+      data: { doctor, availableTimes },
     });
   } catch (error) {
     console.log(error);
@@ -155,10 +155,44 @@ const updateStatusController = async (req, res) => {
   }
 };
 
+//Reject Doctor Controller...
+const rejectDoctorController = async (req, res) => {
+  try {
+    const { doctorId } = req.body;
+    console.log(doctorId);
+    const deleteDoctor = await doctorModel.findByIdAndDelete({ _id: doctorId });
+    // const changeStatus = await userModel.findByIdAndUpdate(doctorId, { isDoctor: false });
+    // if (changeStatus) {
+    //   return res.status(200).send({
+    //     success: true,
+    //     message: "Doctor has been Rejected.",
+    //   });
+    // } else {
+    //   return res.status(404).send({
+    //     success: false,
+    //     message: "Doctor not found or update failed.",
+    //   });
+    // }
+    if (deleteDoctor) {
+      return res.status(200).send({
+        success: true,
+        message: "Doctor Deleted Successfully."
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "An error occurred while deleting the doctor.",
+    });
+  }
+}
+
 module.exports = {
   getDoctorInfoController,
   updateProfileController,
   getDoctorByIdController,
   doctorAppointmentsController,
   updateStatusController,
+  rejectDoctorController,
 };

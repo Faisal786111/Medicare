@@ -1,25 +1,25 @@
-import React,{useState , useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../../components/Layout';
 import Translation from "../././../Translation/Data.json";
 const AdminHome = () => {
 
-     //translation
-    const[language , setLanguage] = useState("english")
-    const[content , setContent] = useState({})
-    useEffect(()=>{
-        if(language=="english"){
-          setContent(Translation.english)
-        }else if(language=="hindi"){
-          setContent(Translation.hindi)
+    //translation
+    const [language, setLanguage] = useState("english")
+    const [content, setContent] = useState({})
+    useEffect(() => {
+        if (language == "english") {
+            setContent(Translation.english)
+        } else if (language == "hindi") {
+            setContent(Translation.hindi)
         }
     })
 
     return (
         <Layout>
-            <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
+            {/* <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
                 <option>english</option>
                 <option>hindi</option>
-            </select>
+            </select> */}
             <div className='backimg_1' style={{ minHeight: "100%" }}>
                 <h2 className='text-center'>{"<<<<"}{content.adminhome}{">>>>"}</h2>
             </div>
