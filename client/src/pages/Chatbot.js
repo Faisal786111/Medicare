@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import TelegramIcon from '@mui/icons-material/Telegram';
 import botImg from "../images/chatbot1.gif";
 import arrayOfPossibleMessage from "../Data/BotScript";
+import { findBestMatch } from 'string-similarity';
 
 const Chatbot = () => {
     const [userMessage, setUserMessage] = useState("");
@@ -17,30 +18,20 @@ const Chatbot = () => {
     }
 
     const chatbotResponse = (userMessage) => {
-        const matchedResponse = arrayOfPossibleMessage.find(val =>
-            val.message.toLowerCase() === userMessage.toLowerCase()
-        );
-
-        let responseToSet = "";
-
-        if (matchedResponse) {
-            responseToSet = matchedResponse.response;
-        } else {
-            const wordsInUserMessage = userMessage.toLowerCase().split(" ");
-            for (let i = 0; i < wordsInUserMessage.length; i++) {
-                const word = wordsInUserMessage[i];
-
-                const matchedWordResponse = arrayOfPossibleMessage.find(val => val.message.toLowerCase().includes(word));
-
-                if (matchedWordResponse) {
-                    responseToSet = matchedWordResponse.response;
-                    break;
-                }
-            }
-        }
-
-        if (responseToSet) {
-            sendMessage(responseToSet, 'chatbot');
+        const userMessageLower = userMessage.toLowerCase();
+    
+        // Create an array of all predefined messages
+        const predefinedMessages = arrayOfPossibleMessage.map(item => item.message.toLowerCase());
+    
+        // Find the best match between the user's message and predefined messages
+        const match = findBestMatch(userMessageLower, predefinedMessages);
+    
+        // Get the index of the best match
+        const bestMatchIndex = match.bestMatchIndex;
+    
+        if (bestMatchIndex >= 0) {
+            const response = arrayOfPossibleMessage[bestMatchIndex].response;
+            sendMessage(response, 'chatbot');
         } else {
             sendMessage("Please send another message", 'chatbot');
         }

@@ -31,6 +31,7 @@
     "react-spinners": "^0.13.7",
     "react-toastify": "^9.1.3",
     "socket.io-client": "^4.7.2",
+    "string-similarity": "^4.0.4",
     "styled-components": "^6.0.8",
     "uui": "^1.0.7",
     "web-vitals": "^2.1.4"
