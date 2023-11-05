@@ -11,13 +11,13 @@ const DoctorList = ({ doctor }) => {
         style={{ width: 270, height: 350, marginLeft: 60, border: '1px solid black', textDecoration: 'none', marginTop: 15, cursor: 'pointer' }}
         onClick={() => navigate(`/doctor/book-appointment/${doctor._id}`)}>
         <div >
-          <p style={{ fontSize: 20, color: 'black' }}><b>Specialization</b> {doctor.specialization}</p>
+          <p style={{ fontSize: 18, color: 'black' }}><b>Specialization</b> {doctor.specialization}</p>
           <Divider style={{ borderColor: 'black' }}></Divider>
-          <p style={{ fontSize: 20, color: 'black' }}><b>Experience</b> {doctor.experience}</p>
+          <p style={{ fontSize: 18, color: 'black' }}><b>Experience</b> {doctor.experience}</p>
           <Divider style={{ borderColor: 'black' }}></Divider>
-          <p style={{ fontSize: 20, color: 'black' }}><b>Fees Per Cunsaltation</b> {doctor.feesPerCunsaltation}</p>
+          <p style={{ fontSize: 18, color: 'black' }}><b>Fees Per Cunsaltation</b> {doctor.feesPerCunsaltation}</p>
           <Divider style={{ borderColor: 'black' }}></Divider>
-          <p style={{ fontSize: 20, color: 'black' }}><b>Timings</b> {doctor.timings.startTime} - {doctor.timings.endTime}</p>
+          <p style={{ fontSize: 18, color: 'black' }}><b>Timings</b> {doctor.timings.startTime} - {doctor.timings.endTime}</p>
         </div>
       </Card>
     </>

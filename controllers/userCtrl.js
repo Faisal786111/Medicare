@@ -246,18 +246,18 @@ const bookingAvailabilityController = async (req, res) => {
     //   drSTFormat.add("00:30"); // Add 30 minutes to drSTFormat
     // }
 
-    
+
     // while (drSTFormat.isBefore(drETFormat)) {
     //   const startTime = drSTFormat.format("HH:mm");
     //   drSTFormat.add("00:30"); // Add 30 minutes to drSTFormat
     //   const endTime = drSTFormat.format("HH:mm");
-      
+
     //   availableTimes.push(`${startTime} - ${endTime}`);
     // }
-    
+
     // console.log(availableTimes)
     // availableTimes.forEach((timeRange, index) => {
-      // console.log(`Slot ${index + 1}: ${timeRange}`);
+    // console.log(`Slot ${index + 1}: ${timeRange}`);
     // });
 
 
@@ -285,9 +285,9 @@ const bookingAvailabilityController = async (req, res) => {
     res.status(200).send({
       success: true,
       message: "Appointments",
-      data   : appointments,
+      data: appointments,
     });
-    
+
 
 
     // if (requestedDate < currentDate) {
@@ -358,6 +358,24 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+//Delete the users....
+const deleteUsers = async (req, res) => {
+  try {
+    const { doctorId } = req.body;
+    const deleteUser = await userModel.findByIdAndDelete({ _id: doctorId });
+    //const deleteDoctor = await doctorModel.findById({ _id: doctorId.userId });
+    // console.log("new id = ", deleteDoctor);
+    if (deleteUser) {
+      return res.status(200).send({
+        success: true,
+        message: "SuccessFully Deleted...",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 module.exports = {
   loginController,
   registerController,
@@ -370,4 +388,5 @@ module.exports = {
   bookingAvailabilityController,
   userAppointmentsController,
   getAllUsers,
+  deleteUsers,
 };
