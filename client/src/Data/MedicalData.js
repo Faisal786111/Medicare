@@ -4,7 +4,7 @@ const medicalData = [
         medicalName: "Ganesh Medical",
         location: "virar",
         time: "9am to 10am",
-        review: "Awesome",
+        review: "This medical facility provides excellent service. The staff is friendly and knowledgeable.",
         link: 'https://maps.app.goo.gl/7CE9YbCHw1HooXfx8',
     },
     {
@@ -12,7 +12,7 @@ const medicalData = [
         medicalName: "Parag Medical",
         location: "virar",
         time: "7am to 11am",
-        review: "fun",
+        review: "Exceptional healthcare services, caring staff, and convenient hours. ",
         link: 'https://maps.app.goo.gl/Z8WDG4DRCN2fjUAr9',
     },
     {
@@ -20,7 +20,7 @@ const medicalData = [
         medicalName: "Uttam Medical",
         location: "virar",
         time: "7am to 9am",
-        review: "Awesome",
+        review: "Highly skilled medical professionals, clean facilities, and extended hours.",
         link: 'https://maps.app.goo.gl/p2XXk8KHMbntG9Sg6',
     },
     {
@@ -28,7 +28,7 @@ const medicalData = [
         medicalName: "Mahalaxmi Medical",
         location: "virar",
         time: "9am to 10am",
-        review: "Awesome",
+        review: "Cutting-edge medical treatments, compassionate team, and a central location.",
         link: 'https://maps.app.goo.gl/wfPx5TjD9XPHjA9V6',
     },
     {
@@ -36,7 +36,7 @@ const medicalData = [
         medicalName: "National Medical",
         location: "virar",
         time: "8am to 10am",
-        review: "Awesome",
+        review: "Great Services . ",
         link: 'https://maps.app.goo.gl/QJN1Afo7jdUamzGU8',
     },
     {
@@ -44,7 +44,7 @@ const medicalData = [
         medicalName: "Om Sainath Medical",
         location: "virar",
         time: "7am to 10am",
-        review: "Awesome",
+        review: "Patient-centric care, knowledgeable doctors, and a soothing environment",
         link: 'https://maps.app.goo.gl/ii5suPS7opvz8pim8',
     },
     {
@@ -52,7 +52,7 @@ const medicalData = [
         medicalName: "Saraswati",
         location: "kharghar",
         time: "9am to 10am",
-        review: "Awesome",
+        review: "Dedicated to patient wellness, skilled professionals, and a state-of-the-art facility.",
         link: 'https://maps.app.goo.gl/DyrJ8HMpBFkUfMcG8',
     },
     {
@@ -60,7 +60,7 @@ const medicalData = [
         medicalName: "Well Medical",
         location: "kharghar",
         time: "9am to 5am",
-        review: "Awesome",
+        review: "Quality medical care, friendly environment, and commitment to patient satisfaction.",
         link: 'https://maps.app.goo.gl/LeF5MfUSavTN6MCV8',
     },
     {
@@ -68,7 +68,7 @@ const medicalData = [
         medicalName: "Swast Medical",
         location: "kharghar",
         time: "9am to 10am",
-        review: "Awesome",
+        review: "Holistic approach to health, skilled healthcare professionals, and a convenient location. ",
         link: 'https://maps.app.goo.gl/CiWkyWVKmT6q5v229',
     },
     {
@@ -76,7 +76,7 @@ const medicalData = [
         medicalName: "Global Chemist",
         location: "kharghar",
         time: "9am to 10am",
-        review: "Awesome",
+        review: "Efficient healthcare services, friendly atmosphere, and accessible hours.",
         link: 'https://maps.app.goo.gl/xiebHQDo4pbf4dVz6',
     },
     {
@@ -84,7 +84,7 @@ const medicalData = [
         medicalName: "National Medical",
         location: "kharghar",
         time: "9am to 10am",
-        review: "Awesome",
+        review: "Modern facilities, caring staff, and a focus on patient well-being. ",
         link: 'https://maps.app.goo.gl/UxFPWbrd5TBhfT1t6',
     },
     {
@@ -92,7 +92,7 @@ const medicalData = [
         medicalName: "Apple Chemist",
         location: "kharghar",
         time: "9am to 10am",
-        review: "Awesome",
+        review: "Comprehensive health services, caring and knowledgeable staff, and a convenient location. ",
         link: 'https://maps.app.goo.gl/Kz12tm8j7fYcRKNX6',
     }
 ];

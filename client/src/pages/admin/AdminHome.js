@@ -18,6 +18,7 @@ const AdminHome = () => {
         <Layout>
             <div className='backimg_1' style={{ minHeight: "100%" }}>
                 <h2 className='text-center'>{"<<<<"}{content.adminhome}{">>>>"}</h2>
+
             </div>
         </Layout>
     )
