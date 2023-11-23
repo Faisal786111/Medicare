@@ -36,6 +36,9 @@ const Navbar = () => {
                         <li className="nav-item">
                             <NavLink className="nav-link me-3 textDark" to="/" >HOME</NavLink>
                         </li>
+                        <li className="nav-item ">
+                            <a className="nav-link me-3 textDark " href="#doctorContaints">ABOUT</a>
+                        </li>
                         <li className="nav-item">
                             {/* <a className={`nav-link me-3 text-white ${isSticky ? "textDark" : "textWhite"}`} href="#BlogContaint">BLOG</a> */}
                             <NavLink className="nav-link me-3 textDark" to="/blogs" >BLOGS</NavLink>
@@ -44,9 +47,6 @@ const Navbar = () => {
                             <span>
                                 <NavLink className={`nav-link me-3 textDark `} to="/chat">CHATAPP</NavLink>
                             </span>
-                        </li>
-                        <li className="nav-item ">
-                            <a className="nav-link me-3 textDark " href="#doctorContaints">ABOUT</a>
                         </li>
 
                         <li className="nav-item">
