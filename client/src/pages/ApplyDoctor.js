@@ -66,7 +66,7 @@ const ApplyDoctor = () => {
                 <option>english</option>
                 <option>hindi</option>
       </select> */}
-      <div className='backimg_1' style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', minHeight: "100%" }}>
+      <div className='backimg_1' style={{ justifyContent: 'center',alignItems: 'center', display: 'flex', minHeight: "100%" }}>
         <Form onFinish={handleFinish} className="register-form2"  >
           <h3 className="text-center">{'<<<'}{content.applydr}{'>>>'}</h3>
           <hr />
@@ -122,12 +122,12 @@ const ApplyDoctor = () => {
           </Row>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label={content.fee} name="feesPerCunsaltation" required rules={[{ required: true }]}>
+              <Form.Item label={content.fee} name="feesPerConsultation" required rules={[{ required: true }]}>
                 <Input type="text" placeholder={content.placefee} required />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label={content.time} name="timings" required rules={[{ required: true }]}>
+              <Form.Item label={content.time} name="timing" required rules={[{ required: true }]}>
                 <TimePicker.RangePicker format="HH:mm" />
               </Form.Item>
             </Col>
