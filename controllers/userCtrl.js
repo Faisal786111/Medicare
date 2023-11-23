@@ -100,14 +100,14 @@ const applyDoctorController = async (req, res) => {
     await userModel.findByIdAndUpdate(adminUser._id, { notifcation });
     res.status(201).send({
       success: true,
-      message: "Doctor Account Applied SUccessfully",
+      message: "Doctor Account Applied Successfully",
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
       error,
-      message: "Error WHile Applying For Doctotr",
+      message: "Error While Applying For Doctor",
     });
   }
 };
@@ -166,7 +166,7 @@ const getAllDocotrsController = async (req, res) => {
     const doctors = await doctorModel.find({ status: "approved" });
     res.status(200).send({
       success: true,
-      message: "Docots Lists Fetched Successfully",
+      message: "Docotors List Fetched Successfully",
       data: doctors,
     });
   } catch (error) {
@@ -174,7 +174,7 @@ const getAllDocotrsController = async (req, res) => {
     res.status(500).send({
       success: false,
       error,
-      message: "Errro WHile Fetching DOcotr",
+      message: "Errro While Fetching Docotr",
     });
   }
 };
@@ -192,7 +192,7 @@ const bookeAppointmnetController = async (req, res) => {
     const user = await userModel.findOne({ _id: req.body.doctorInfo.userId });
     user.notifcation.push({
       type: "New-appointment-request",
-      message: `A nEw Appointment Request from ${req.body.userInfo.name}`,
+      message: `A New Appointment Request From ${req.body.userInfo.name}`,
       onCLickPath: "/user/appointments",
     });
     await user.save();
@@ -289,7 +289,6 @@ const bookingAvailabilityController = async (req, res) => {
     });
 
 
-
     // if (requestedDate < currentDate) {
     //   return res.status(200).send({
     //     message: "Appointments not Availibale at this time",
@@ -318,15 +317,57 @@ const bookingAvailabilityController = async (req, res) => {
   }
 };
 
+// const userAppointmentsController = async (req, res) => {
+//   try {
+//     const appointments = await appointmentModel.find({
+//       userId: req.body.userId,
+//     });
+//     res.status(200).send({
+//       success: true,
+//       message: "Users Appointments Fetch Successfully",
+//       data: appointments ,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({
+//       success: false,
+//       error,
+//       message: "Error In User Appointments",
+//     });
+//   }
+// };
+
 const userAppointmentsController = async (req, res) => {
   try {
+    // Fetch appointments for the given userId
     const appointments = await appointmentModel.find({
       userId: req.body.userId,
     });
+
+    // Fetch doctor details for each appointment
+    const appointmentsWithDoctors = await Promise.all(
+      appointments.map(async (appointment) => {
+        // Fetch doctor details based on the doctorId in the appointment
+        const doctor = await doctorModel.findOne({ _id: appointment.doctorId });
+
+        // If a doctor is found, add doctor details to the appointment
+        if (doctor) {
+          return {
+            ...appointment.toObject(),
+            doctorName: doctor.firstName +" "+ doctor.lastName,
+            // Add more doctor details if needed
+          };
+        }
+
+        // If no doctor is found, return the appointment without doctor details
+        return appointment.toObject();
+      })
+    );
+
     res.status(200).send({
       success: true,
-      message: "Users Appointments Fetch Successfully",
-      data: appointments,
+      message: "User's Appointments Fetch Successfully",
+      data: appointmentsWithDoctors,
     });
   } catch (error) {
     console.log(error);
@@ -337,6 +378,7 @@ const userAppointmentsController = async (req, res) => {
     });
   }
 };
+
 
 //Get all users for blog....
 const getAllUsers = async (req, res) => {
@@ -352,7 +394,7 @@ const getAllUsers = async (req, res) => {
     console.log(error);
     return res.status(500).send({
       success: false,
-      message: "Error In Get ALl Users",
+      message: "Error In Get All Users",
       error,
     });
   }

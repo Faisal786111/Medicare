@@ -23,7 +23,7 @@ const getDoctorInfoController = async (req, res) => {
 
     res.status(200).send({
       success: true,
-      message: "Doctor data fetch success",
+      message: "Doctor data fetch successfully",
       data: {
         ...doctor._doc,
         timings: formattedTimings,
@@ -90,15 +90,15 @@ const getDoctorByIdController = async (req, res) => {
 
     res.status(200).send({
       success: true,
-      message: "Sigle Doc Info Fetched",
-      data: { doctor, availableTimes },
+      message: "Single Doctor Information Fetched",
+      data   : {doctor,availableTimes},
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
       error,
-      message: "Erro in Single docot info",
+      message: "Erro in Single docotor info",
     });
   }
 };
@@ -112,7 +112,7 @@ const doctorAppointmentsController = async (req, res) => {
     });
     res.status(200).send({
       success: true,
-      message: "Doctor Appointments fetch Successfully",
+      message: "Doctor Appointments Fetched Successfully",
       data: appointments,
     });
   } catch (error) {
@@ -120,7 +120,7 @@ const doctorAppointmentsController = async (req, res) => {
     res.status(500).send({
       success: false,
       error,
-      message: "Error in Doc Appointments",
+      message: "Error in Doctor Appointments",
     });
   }
 };

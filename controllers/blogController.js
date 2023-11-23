@@ -39,7 +39,7 @@ const createBlogController = async (req, res) => {
         if (!title || !description || !image || !user) {
             return res.status(400).send({
                 success: false,
-                message: "Please Provide ALl Fields",
+                message: "Please Provide All Fields",
             });
         }
         const existingUser = await userModel.findById(user);
@@ -118,7 +118,7 @@ const getBlogByIdController = async (req, res) => {
         if (!blog) {
             return res.status(404).send({
                 success: false,
-                message: "blog not found with this is",
+                message: "blog not found with this",
             });
         }
         return res.status(200).send({
@@ -153,7 +153,7 @@ const deleteBlogController = async (req, res) => {
         console.log(error);
         return res.status(400).send({
             success: false,
-            message: "Erorr WHile Deleteing BLog",
+            message: "Erorr While Deleteing Blog",
             error
         });
     }
