@@ -48,9 +48,12 @@ const Users = () => {
           },
         }
       );
-      window.alert("User Deleted Successfully.");
-      window.location.reload();
-      console.log(res);
+      if (res.data.success) {
+        message.success(res.data.message);
+        window.alert("Doctor Successfully approved.");
+        window.location.reload();
+      }
+      //console.log(res);
     } catch (error) {
       console.log(error);
     }
