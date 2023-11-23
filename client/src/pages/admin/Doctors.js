@@ -7,17 +7,18 @@ import Translation from '.././././../Translation/Data.json';
 const Doctors = () => {
 
   //translation
-  const[language , setLanguage] = useState("english")
-  const[content , setContent] = useState({})
-  useEffect(()=>{
-      if(language=="english"){
-        setContent(Translation.english)
-      }else if(language=="hindi"){
-        setContent(Translation.hindi)
-      }
+  const [language, setLanguage] = useState("english")
+  const [content, setContent] = useState({})
+  useEffect(() => {
+    if (language == "english") {
+      setContent(Translation.english)
+    } else if (language == "hindi") {
+      setContent(Translation.hindi)
+    }
   })
 
   const [doctors, setDoctors] = useState([]);
+
   //getUsers
   const getDoctors = async () => {
     try {
@@ -33,6 +34,29 @@ const Doctors = () => {
       console.log(error);
     }
   };
+
+  //Reject Doctor...
+  const RejectDoctor = async (record) => {
+    try {
+      console.log(doctors);
+      const res = await axios.post("/api/v1/doctor/rejectDoctor",
+        { doctorId: record._id },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (res.data.success) {
+        message.success(res.data.message);
+        window.alert("Doctor Deleted Successfully.");
+        window.location.reload();
+      }
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // handle account
   const handleAccountStatus = async (record, status) => {
@@ -87,16 +111,18 @@ const Doctors = () => {
             <button
               className="btn btn-success"
               onClick={() => handleAccountStatus(record, "approved")}
+              style={{ width: "100px", cursor: "pointer" }}
             >
               Approve
             </button>
           ) : (
-            <button className="btn btn-danger">Reject</button>
+            <button className="btn btn-danger" onClick={() => RejectDoctor(record)} style={{ width: "100px", cursor: "pointer" }}>Reject</button>
           )}
         </div>
       ),
     },
   ];
+
 
   return (
     <Layout>

@@ -88,7 +88,7 @@ grid-template-rows: 10% 75% 15%;
     &::-webkit-scrollbar {
       width: 0.2rem;
       &-thumb {
-        background-color: #ffffff39;
+        background-color: lightgray;
         width: 0.1rem;
         border-radius: 1rem;
       }

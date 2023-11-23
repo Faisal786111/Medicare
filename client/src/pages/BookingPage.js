@@ -73,18 +73,17 @@ const BookingPage = () => {
       console.log(error);
     }
   };
-  
+
   const handleAvailability = async (newDate) => {
     const todayDate = moment(new Date(), 'DD-MM-YYYY').format("DD-MM-YYYY");
-    if(newDate<todayDate)
-    {
+    if (newDate < todayDate) {
       setAvailableTime([])
       message.error("You cannot select previouse date")
       return;
     }
 
     getUserData();
-    console.log("use stage",newDate);
+    console.log("use stage", newDate);
 
     try {
       // dispatch(showLoading());
@@ -121,7 +120,7 @@ const BookingPage = () => {
   // =============== booking function==========================
   const handleBooking = async (row) => {
     try {
-      
+
 
       console.log(row.timeSlot)
       //handleAvailability(date)
@@ -151,7 +150,7 @@ const BookingPage = () => {
         message.success(res.data.message);
       }
 
-      console.log("booking date",appointments[0].date)
+      console.log("booking date", appointments[0].date)
       const res1 = await axios.post(
         "/api/v1/user/booking-availbility",
         { doctorId: params.doctorId, date: appointments[0].date },
@@ -186,13 +185,13 @@ const BookingPage = () => {
   }));
 
   const dateChange = (newDate) => {
-    console.log("current Date",currentDate)
+    console.log("current Date", currentDate)
     const myDate = moment(newDate, "DD-MM-YYYY").format('DD-MM-YYYY')
     setDate(myDate)
     handleAvailability(newDate)
   }
 
-  
+
   const col = [
     {
       name: 'Time Slot',
@@ -204,13 +203,13 @@ const BookingPage = () => {
       cell: (row) => {
         const isBooked = appointments.find(appointment => appointment.time === row.timeSlot)
         return (
-          
+
           isBooked ? (
-            <button  className="btn button " style={{ cursor: 'not-allowed'  }}  disabled>Booked</button>
+            <button className="btn button " style={{ cursor: 'not-allowed' }} disabled>Booked</button>
           ) : (
             <button
               onClick={() => handleBooking(row)}
-              className="btn btn-primary  " style={{width : "100px" , cursor:"pointer"}}
+              className="btn btn-primary  " style={{ width: "100px", cursor: "pointer" }}
             >
               Book Now
             </button>
@@ -244,12 +243,12 @@ const BookingPage = () => {
                   {doctors.timings && doctors.timings.endTime}{" "}
                 </h4>
                 <Divider style={{ borderColor: 'black' }}></Divider>
-                {<div className="d-flex flex-row align-items-center" style={{ marginLeft: 80, alignContent:"flex-start" }}>
+                {<div className="d-flex flex-row align-items-center" style={{ marginLeft: 80, alignContent: "flex-start" }}>
                   <h5>Choose Appointment Date:</h5>
                   <DatePicker
                     aria-required="true"
                     defaultValue={currentDate}
-                    className="m-2" style={{width:"50%"}}
+                    className="m-2" style={{ width: "50%" }}
                     format="DD-MM-YYYY"
                     onChange={(value) => dateChange(value.format("DD-MM-YYYY"))}
                   />

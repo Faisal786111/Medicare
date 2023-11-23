@@ -11,6 +11,7 @@ const {
   bookingAvailabilityController,
   userAppointmentsController,
   getAllUsers,
+  deleteUsers,
 } = require("../controllers/userCtrl");
 const authMiddleware = require("../middlewares/authMiddleware");
 
@@ -61,5 +62,8 @@ router.get("/user-appointments", authMiddleware, userAppointmentsController);
 
 //Get all users for blog...
 router.get("/all-users", getAllUsers);
+
+//Delete Users....
+router.post("/deleteUser", deleteUsers);
 
 module.exports = router;
