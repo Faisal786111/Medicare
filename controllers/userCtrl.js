@@ -316,15 +316,57 @@ const bookingAvailabilityController = async (req, res) => {
   }
 };
 
+// const userAppointmentsController = async (req, res) => {
+//   try {
+//     const appointments = await appointmentModel.find({
+//       userId: req.body.userId,
+//     });
+//     res.status(200).send({
+//       success: true,
+//       message: "Users Appointments Fetch Successfully",
+//       data: appointments ,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).send({
+//       success: false,
+//       error,
+//       message: "Error In User Appointments",
+//     });
+//   }
+// };
+
 const userAppointmentsController = async (req, res) => {
   try {
+    // Fetch appointments for the given userId
     const appointments = await appointmentModel.find({
       userId: req.body.userId,
     });
+
+    // Fetch doctor details for each appointment
+    const appointmentsWithDoctors = await Promise.all(
+      appointments.map(async (appointment) => {
+        // Fetch doctor details based on the doctorId in the appointment
+        const doctor = await doctorModel.findOne({ _id: appointment.doctorId });
+
+        // If a doctor is found, add doctor details to the appointment
+        if (doctor) {
+          return {
+            ...appointment.toObject(),
+            doctorName: doctor.firstName +" "+ doctor.lastName,
+            // Add more doctor details if needed
+          };
+        }
+
+        // If no doctor is found, return the appointment without doctor details
+        return appointment.toObject();
+      })
+    );
+
     res.status(200).send({
       success: true,
-      message: "Users Appointments Fetch Successfully",
-      data: appointments,
+      message: "User's Appointments Fetch Successfully",
+      data: appointmentsWithDoctors,
     });
   } catch (error) {
     console.log(error);
@@ -335,6 +377,7 @@ const userAppointmentsController = async (req, res) => {
     });
   }
 };
+
 
 //Get all users for blog....
 const getAllUsers = async (req, res) => {

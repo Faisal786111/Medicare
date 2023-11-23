@@ -16,10 +16,6 @@ const AdminHome = () => {
 
     return (
         <Layout>
-            <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
-                <option>english</option>
-                <option>hindi</option>
-            </select>
             <div className='backimg_1' style={{ minHeight: "100%" }}>
                 <h2 className='text-center'>{"<<<<"}{content.adminhome}{">>>>"}</h2>
             </div>

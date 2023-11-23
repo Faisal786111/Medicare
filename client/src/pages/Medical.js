@@ -21,7 +21,7 @@ const Medical = () => {
 
     return (
         <Layout>
-            <div className='backimg_1' style={{ minHeight: "100%", border: "1px solid blue" }}>
+            <div className='backimg_1' style={{ minHeight: "100%" }}>
                 {/* <div style={{ display: "flex ", justifyContent: "flex-end",gap:"30px", height: "",marginTop:"30px" , alignItems: "center", border: "1px solid black", gap: "10px" }}> */}
                 {/* <h2 style={{  }}>{'<<<'}{select}{'>>>'}</h2> */}
                 <select value={select} onChange={(e) => setSelect(e.target.value)} style={{ width: '200px', height: '40px', marginLeft: "76%", marginTop: "20px", background: 'linear-gradient(to right,#dddddd, #ffffff)' }}>

@@ -67,10 +67,6 @@ const Users = () => {
 
   return (
     <Layout>
-      <select value={language} onChange={(e)=>{setLanguage(e.target.value)}}>
-                <option>english</option>
-                <option>hindi</option>
-            </select>
       <div className="backimg_1" style={{ minHeight: '100%' }}>
         <h1 className="text-center m-2">{'<<<'}{content.userpage}{'>>>'}</h1>
         <Table columns={columns} dataSource={users} bordered style={{ border: '1px solid black', margin: '5px 10px', backgroundColor: 'lightgray' }} />
